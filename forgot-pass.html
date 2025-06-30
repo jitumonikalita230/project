@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forgot Password</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    /* (CSS unchanged from your code) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      background: linear-gradient(rgb(67, 67, 67), rgb(34, 33, 33), black);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .wrapper {
+      width: 420px;
+      color: antiquewhite;
+      padding: 20px;
+      border-radius: 8px;
+      background: transparent;
+      border: 2px solid rgb(53, 39, 39);
+    }
+
+    .wrapper h1 {
+      text-align: center;
+    }
+
+    .input-box {
+      width: 100%;
+      background: transparent;
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 15px;
+      border: 2px solid rgb(202, 192, 192);
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 30px;
+      border-radius: 15px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      color: antiquewhite;
+    }
+
+    .input-box input::placeholder {
+      color: antiquewhite;
+    }
+
+    .input-box:hover {
+      transform: scale(0.98);
+    }
+
+    .btn {
+      width: 100%;
+      height: 35px;
+      margin-top: 15px;
+      border-radius: 15px;
+      cursor: pointer;
+      border: none;
+      background-color: rgb(151, 244, 244);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: rgb(57, 55, 55);
+      transform: scale(1.05);
+      color: white;
+    }
+
+    .register-link {
+      display: flex;
+      justify-content: space-between;
+      font-size: larger;
+      margin-top: 15px;
+    }
+
+    .register-link a {
+      color: cyan;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <form id="forgotForm">
+      <h1>Forgot Password</h1>
+
+      <div class="input-box">
+        <input type="text" id="forgotUsername" placeholder="Username" required>
+        <i class='bx bx-user'></i>
+      </div>
+
+      <div class="input-box">
+        <input type="email" id="confirmEmail" placeholder="Confirm Email" required>
+        <i class='bx bx-envelope'></i>
+      </div>
+
+      <button class="btn" type="submit">Get OTP</button>
+
+      <div class="register-link">
+        <p>Don't have an account?</p>
+        <a href="register.html">Register here</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
+
+

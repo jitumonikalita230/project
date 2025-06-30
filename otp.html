@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OTP Input</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(to bottom, #636363, #1e1e1e, #000);
+      color: white;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 36px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .otp {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .otp_input {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .otp_input input {
+      text-align: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+      font-weight: bold;
+      font-size: 24px;
+      color: #ffffff;
+      border: 2px solid #ffffff44;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .otp_input input:focus {
+      outline: none;
+      border-color: aqua;
+      background-color: rgba(0, 255, 255, 0.1);
+      box-shadow: 0 0 8px aqua;
+    }
+
+    .button {
+      padding: 14px 32px;
+      font-size: 18px;
+      color: #000;
+      background-color: aqua;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .button:hover {
+      background-color: #00dddd;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 255, 255, 0.5);
+    }
+
+    @media screen and (max-width: 500px) {
+      .otp_input input {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+      }
+
+      .button {
+        padding: 12px 24px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Enter OTP</h1>
+
+ <form class="otp" id="otpForm">
+  <div class="otp_input">
+    <input type="text" maxlength="1" class="otp-box">
+    <input type="text" maxlength="1" class="otp-box">
+    <input type="text" maxlength="1" class="otp-box">
+    <input type="text" maxlength="1" class="otp-box">
+  </div>
+  <button type="submit" class="button">Submit</button>
+</form>
+
+
+<!-- ✅ FIRST: Load login.js which contains userDatabase -->
+<script src="login.js"></script>
+
+<!-- ✅ THEN: your OTP logic -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const otpForm = document.getElementById("otpForm");
+    const otpInputs = document.querySelectorAll(".otp_input input");
+
+    // Move to next input automatically
+    otpInputs.forEach((input, index) => {
+      input.addEventListener("input", () => {
+        if (input.value && index < otpInputs.length - 1) {
+          otpInputs[index + 1].focus();
+        }
+      });
+    });
+
+    otpForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const enteredOtp = Array.from(otpInputs).map(input => input.value).join("");
+      const savedOtp = localStorage.getItem("generatedOTP");
+
+      if (enteredOtp === savedOtp) {
+        const loggedInUser = localStorage.getItem("loggedInUser");
+
+        if (loggedInUser && userDatabase[loggedInUser]) {
+          const userPassword = userDatabase[loggedInUser];
+          alert("✅ OTP Verified! Your password is: " + userPassword);
+        } else {
+          alert("User info not found.");
+        }
+
+        localStorage.removeItem("generatedOTP");
+      } else {
+        alert("❌ Incorrect OTP. Please try again.");
+      }
+    });
+  });
+</script>
+
+
+</body>
+</html>
